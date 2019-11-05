@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  become: no
+  vars_files:
+    - ./group_vars/all.yml
+
+  roles:
+    - role: ansible-terraform
+      vars:
+        terraform_path: "./terraform"
+        terraform_state: "present"
+        workspace: "development"

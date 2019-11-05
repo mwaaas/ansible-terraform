@@ -1,0 +1,35 @@
+---
+- name: terraform init
+  command: terraform init
+  args:
+    chdir: "{{ terraform_path }}"
+
+- name: get terraform variables
+  terraform_variables:
+    path: "{{ terraform_path }}"
+  register: get_terraform_results
+
+- name: prepare terraform variables
+  set_fact:
+    terraformVariables: '{{ terraformVariables | default({})| combine({item: lookup("vars", "{{item}}")})}}'
+  with_items: "{{get_terraform_results.terraformVariables}}"
+
+
+- name: delete old terraform logs
+  file: path="{{ terraform_path }}/terrafor.log" state=absent
+
+
+- name: terraform state
+  debug: msg="{{terraform_state}}"
+
+# https://docs.ansible.com/ansible/latest/modules/terraform_module.html
+- name: provision terraform
+  custom_terraform:
+    project_path: "{{ terraform_path }}"
+    state: "{{terraform_state}}"
+    workspace: "{{workspace}}"
+    variables: "{{terraformVariables}}"
+  register: terraform
+
+- name: terraform output
+  debug: msg="{{terraform.stdout}}"

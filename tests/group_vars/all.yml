@@ -1,0 +1,15 @@
+TABLE_NAME: "foo"
+WRITE_CAPACITY: 10
+READ_CAPACITY: 10
+ENV: development
+
+DEFAULT_TAGS:
+  Classification: "restricted"
+  Environment: "{{ENV}}"
+  Owner: "mwas"
+  Status: "active"
+
+
+AWS_PROFILE: mwaside
+AWS_DYNAMODB_ENDPOINT: "http://dynamodb-local-mock-unsupported-api:4567"
+AWS_STS_ENDPOINT: "http://localaws:4592"
