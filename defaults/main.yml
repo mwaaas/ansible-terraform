@@ -1,2 +1,5 @@
 ---
 # defaults file for ansible-terraform
+terraform_path: "./terraform"
+terraform_state: "present"
+workspace: "default"

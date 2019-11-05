@@ -8,7 +8,3 @@
 
   roles:
     - role: ansible-terraform
-      vars:
-        terraform_path: "./terraform"
-        terraform_state: "present"
-        workspace: "development"
