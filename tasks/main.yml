@@ -22,6 +22,10 @@
 - name: terraform state
   debug: msg="{{terraform_state}}"
 
+- name: output terraform variables
+  debug: msg="{{terraformVariables}}"
+  when: debug
+
 # https://docs.ansible.com/ansible/latest/modules/terraform_module.html
 - name: provision terraform
   custom_terraform:

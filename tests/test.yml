@@ -10,3 +10,4 @@
     - role: ansible-terraform
       vars:
         workspace: "development"
+        debug: True

@@ -1,6 +1,7 @@
 version: "3.4"
 services:
   dev_tools:
+    command: ansible-playbook tests/test.yml
     depends_on:
       - localaws
       - dynamodb-ui
