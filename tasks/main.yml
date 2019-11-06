@@ -26,6 +26,11 @@
   debug: msg="{{terraformVariables}}"
   when: debug
 
+- name: generate terraform variables
+  template: src=templates/variables.tfvars.j2
+    dest="{{ terraform_path }}/variables.tfvars"
+  when: debug
+
 # https://docs.ansible.com/ansible/latest/modules/terraform_module.html
 - name: provision terraform
   custom_terraform:
