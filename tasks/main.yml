@@ -16,7 +16,7 @@
 
 
 - name: delete old terraform logs
-  file: path="{{ terraform_path }}/terrafor.log" state=absent
+  file: path="{{ terraform_path }}/terraform.log" state=absent
 
 
 - name: terraform state
