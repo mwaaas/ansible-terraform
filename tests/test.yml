@@ -11,3 +11,4 @@
       vars:
         workspace: "development"
         debug: True
+        generate_terraform_variables: True

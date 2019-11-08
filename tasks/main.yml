@@ -29,7 +29,9 @@
 - name: generate terraform variables
   template: src=templates/variables.tfvars.j2
     dest="{{ terraform_path }}/variables.tfvars"
-  when: debug
+  when:
+    - debug
+    - generate_terraform_variables
 
 # https://docs.ansible.com/ansible/latest/modules/terraform_module.html
 - name: provision terraform
