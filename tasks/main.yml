@@ -46,4 +46,9 @@
   debug: msg="{{terraform.stdout}}"
 
 - name: terraform output
-  debug: msg="{{terraform.outputs}}"
+  debug: msg="{{item.value.value}}"
+
+- name: add outputs in variables
+  set_fact:
+    "{{ item.key }}": "{{ item.value.value }}"
+  with_dict: "{{terraform.outputs}}"

@@ -12,3 +12,7 @@
         workspace: "development"
         debug: True
         generate_terraform_variables: True
+
+  tasks:
+    - debug:
+        msg: dynamo_db_name_output- "{{dynamo_db_name}}"
