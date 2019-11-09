@@ -44,3 +44,6 @@
 
 - name: terraform output
   debug: msg="{{terraform.stdout}}"
+
+- name: terraform output
+  debug: msg="{{terraform.outputs}}"
