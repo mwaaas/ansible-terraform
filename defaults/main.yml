@@ -5,3 +5,4 @@ terraform_state: "present"
 workspace: "default"
 debug: False
 generate_terraform_variables: False
+generate_terraform_variables_only: False

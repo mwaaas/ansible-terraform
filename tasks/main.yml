@@ -31,7 +31,7 @@
     dest="{{ terraform_path }}/variables.tfvars"
   when:
     - debug
-    - generate_terraform_variables
+    - generate_terraform_variables or generate_terraform_variables_only
 
 # https://docs.ansible.com/ansible/latest/modules/terraform_module.html
 - name: provision terraform
@@ -41,14 +41,18 @@
     workspace: "{{workspace}}"
     variables: "{{terraformVariables}}"
   register: terraform
+  when: not generate_terraform_variables_only
 
 - name: terraform output
   debug: msg="{{terraform.stdout}}"
+  when: not generate_terraform_variables_only
 
 - name: terraform output
   debug: msg="{{terraform.outputs}}"
+  when: not generate_terraform_variables_only
 
 - name: add outputs in variables
   set_fact:
     "{{ item.key }}": "{{ item.value.value }}"
   with_dict: "{{terraform.outputs}}"
+  when: not generate_terraform_variables_only
