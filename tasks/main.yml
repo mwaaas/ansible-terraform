@@ -55,4 +55,6 @@
   set_fact:
     "{{ item.key }}": "{{ item.value.value }}"
   with_dict: "{{terraform.outputs}}"
-  when: not generate_terraform_variables_only
+  when:
+    - not generate_terraform_variables_only
+    - add_terraform_output_in_vars

@@ -12,6 +12,7 @@
         workspace: "development"
         debug: True
         generate_terraform_variables: True
+        add_terraform_output_in_vars: True
 
   tasks:
     - debug:

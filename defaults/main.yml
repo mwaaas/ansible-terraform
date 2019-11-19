@@ -6,3 +6,4 @@ workspace: "default"
 debug: False
 generate_terraform_variables: False
 generate_terraform_variables_only: False
+add_terraform_output_in_vars: True
