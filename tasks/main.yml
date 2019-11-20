@@ -9,6 +9,10 @@
     path: "{{ terraform_path }}"
   register: get_terraform_results
 
+- name: initialize terraform variable
+  set_fact:
+    terraformVariables: {}
+
 - name: prepare terraform variables
   set_fact:
     terraformVariables: '{{ terraformVariables | default({})| combine({item: lookup("vars", "{{item}}")})}}'
