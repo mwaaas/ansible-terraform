@@ -279,6 +279,7 @@ def main():
             workspace=dict(required=False, type='str', default='default'),
             purge_workspace=dict(type='bool', default=False),
             state=dict(default='present', choices=['present', 'absent', 'planned']),
+            refresh=dict(type='bool', default=True),
             variables=dict(type='dict'),
             variables_file=dict(type='path'),
             plan_file=dict(type='path'),
@@ -305,6 +306,7 @@ def main():
     state_file = module.params.get('state_file')
     force_init = module.params.get('force_init')
     backend_config = module.params.get('backend_config')
+    refresh = module.params.get('refresh')
 
     if bin_path is not None:
         command = [bin_path]
@@ -374,6 +376,16 @@ def main():
         if rc != 0:
             module.fail_json(
                 msg="Failure when executing Terraform command. Exited {0}.\nstdout: {1}\nstderr: {2}".format(rc, out, err),
+                command=' '.join(command)
+            )
+    elif refresh:
+        refresh_command = [command[0], 'refresh']
+        rc, out, refresh = module.run_command(refresh_command, cwd=project_path)
+
+        if rc != 0:
+            module.fail_json(
+                msg="Failure when executing Terraform command. Exited {0}.\nstdout: {1}\nstderr: {2}".
+                    format(rc, out, err),
                 command=' '.join(command)
             )
 
