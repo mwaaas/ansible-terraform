@@ -1,22 +1,49 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+ansible-terraform
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+ansible >= 2.8
 
 Role Variables
 --------------
+1. terraform_path
+defaults to ./terraform 
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+2. terraform_state
+Used to determine whether to apply or destroy resources
+Options are present or absent defaults to present
+
+3. workspace
+workspace to use when running terraform apply 
+defaults to "default"
+
+4. debug
+ boolean used to output debug info 
+ defaults to False 
+ 
+5. generate_terraform_variables
+boolean that defaults to False 
+Used to create a terraform variable to a .tvars file
+Mainly used for troubleshooting 
+
+6. generate_terraform_variables_only
+If you don't want to run apply using this role but want to 
+get the variables to test manually 
+
+7. add_terraform_output_in_vars
+boolean that defaults to True
+
+Adds all the terraform output to ansible vars 
+
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+Does not require any dependencies 
 
 Example Playbook
 ----------------
@@ -25,7 +52,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: ansible-terraform }
 
 License
 -------
