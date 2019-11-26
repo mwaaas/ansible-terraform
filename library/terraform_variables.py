@@ -34,11 +34,11 @@ def main():
     if not os.path.isdir(path):
         module.fail_json(msg="{} is not a directory".format(path))
 
-    files = [f for f in glob.glob(path + "**/*.tf")]
+    files = [f for f in glob.glob(path + "/*.tf")]
 
     variables = []
-    for file in files:
-        variables.extend(get_variables_in_file(file))
+    for f in files:
+        variables.extend(get_variables_in_file(f))
 
     module.exit_json(**{"changed": False, destination_key: variables})
 
